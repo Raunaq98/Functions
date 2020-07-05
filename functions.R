@@ -1,11 +1,11 @@
 add2 <- function(x,y){    #simple addition of two numbers
-    x+y
+  x+y
 }
 
 
 above <- function(x,n){    # to print elements of a numeric vector that lie above as certain threshold number
-      use <- x > n
-      x[use]
+  use <- x > n
+  x[use]
 }
 # x<- 1:10
 # above(x,5)
@@ -26,12 +26,12 @@ abovee <- function(y,m=10){
 ###### write a function to calculate mean of each column  of a dataframe
 
 colmean<- function(data){
-          col_num <- ncol(data)        # made a variable that store the number of columns
-          means <- numeric(col_num)   # made an empty vector with length equal to no. columns of input
-          for( p in 1:col_num){        # picking each column one by one
-              means[p] <- mean(data[ ,p])      #storing in a certain index of empty vector the mean of data pertaining to that index column only
-          }
-          means
+  col_num <- ncol(data)        # made a variable that store the number of columns
+  means <- numeric(col_num)   # made an empty vector with length equal to no. columns of input
+  for( p in 1:col_num){        # picking each column one by one
+    means[p] <- mean(data[ ,p])      #storing in a certain index of empty vector the mean of data pertaining to that index column only
+  }
+  means
 }
 
 # problem with this would be it wont process NAs.
@@ -45,3 +45,16 @@ colmean<- function(data, removeNA=TRUE){
   }
   means
 }
+
+################# lexical scoping
+
+
+y<- 10
+
+f1<- function(x){
+  y<-2
+  y^2 +g(x)            # y is looked up in the enivornment it is defined in ie the function itself, therefore y = 2
+}                          # g is then called
+g <- function(x){
+  x*y                    # x is already passed from f1 to g(), y is now searched in the environment it is defined in
+}                         # since there is no wwhy in the functional enivornment, it is searched in the global environment ie y=10
