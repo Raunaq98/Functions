@@ -58,3 +58,72 @@ f1<- function(x){
 g <- function(x){
   x*y                    # x is already passed from f1 to g(), y is now searched in the environment it is defined in
 }                         # since there is no wwhy in the functional enivornment, it is searched in the global environment ie y=10
+
+
+#######################
+
+evaluate <-function(func,dat){
+    func(dat)
+}
+evaluate(function(x){x+1}, 6)
+#[1] 7
+#The first argument is a tiny anonymous function that takes one argument `x` and returns `x+1`. 
+#We passed the number 6 into this function so the entire expression evaluates to 7.
+
+##################
+
+paste("Programming","is","fun!")
+# [1] "Programming is fun!”
+
+telegram <- function(...){
+  paste("START",...,"STOP")
+}
+telegram("Programming","is","fun!")
+# [1] "START Programming is fun! STOP"
+
+
+############### MADLIBS
+
+# Have you ever played Mad Libs before? The function below will construct a
+# sentence from parts of speech that you provide as arguments. We'll write most
+# of the function, but you'll need to unpack the appropriate arguments from the
+# ellipses.
+
+mad_libs <- function(...){
+  args<- list(...)
+  place<- args[["place"]]
+  adjective<- args[["adjective"]]
+  noun<- args[["noun"]]
+  # Do your argument unpacking here!
+  
+  # Don't modify any code below this comment.
+  # Notice the variables you'll need to create in order for the code below to
+  # be functional!
+  paste("News from", place, "today where", adjective, 
+        "students took to the streets in protest of the new", noun, "being installed on campus.")
+}
+# mad_libs(place="delhi",adjective="beautiful",noun="statues")
+# [1] "News from delhi today where beautiful students took to the 
+#      streets in protest of the new statues being installed on campus."
+
+
+############### creating own binary operators
+
+# The syntax for creating new binary operators in R is unlike anything else in
+# R, but it allows you to define a new syntax for your function. I would only
+# recommend making your own binary operator if you plan on using it often!
+
+# User-defined binary operators have the following syntax:
+#      %[whatever]% 
+# where [whatever] represents any valid variable name.
+
+# Write your own binary operator below from absolute scratch! Your binary
+# operator must be called %p% so that the expression:
+
+#       "Good" %p% "job!"
+
+# will evaluate to: "Good job!"
+
+"%p%" <- function(char1,char2){ 
+  paste(char1,char2)
+}
